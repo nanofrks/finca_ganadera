@@ -365,14 +365,34 @@ public class adm_ganado extends javax.swing.JFrame {
                             int vacuna= JOptionPane.showConfirmDialog(null, "¿Desea vacunar? ");
 
                             if(vacuna == JOptionPane.YES_OPTION){
-                                maxvac--;
+                                if(t_ganado.getValueAt(row, 3).equals("si")){
+                                        JOptionPane.showMessageDialog(null, "el animal seleccionado ya está vacunado");
+                                    }
+                                else{
+                                    maxvac--;
+                                }
+                                
                                 if(maxvac<0){
                                     JOptionPane.showMessageDialog(null, "Solo se pueden vacunar 10 animales por jornada");
                                     jornada_en_proceso=false;
                                     return;
                                 }
                                 else{
-                                    JOptionPane.showMessageDialog(null, "Vacunado");
+                                    if(t_ganado.getValueAt(row, 3).equals("no")){
+                                        for(int i=0;i<info_all.length;i++){
+                                            for(int j=0;j<4;j++){
+                                                    if(t_ganado.getValueAt(row, 0).equals(info_all[i][0])){
+                                                            info_all[i][3]="si";
+                                                            t_ganado.setValueAt("si", row, 3);
+                                                            u=0;d=0;t=0;c=0;n=0;s=0;e=0;
+                                                            actualizar();
+                                                            adm_potreros();
+                                                      }
+                                              }
+                                    }
+                                        
+                                        JOptionPane.showMessageDialog(null, "Vacunado");
+                                    }
                                 }
                         }
                         }
