@@ -174,10 +174,10 @@ public class adm_ganado extends javax.swing.JFrame {
         );
         verpotrerosLayout.setVerticalGroup(
             verpotrerosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(ver_potreros, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+            .addComponent(ver_potreros, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jPanel1.add(verpotreros, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 150, 170, 50));
+        jPanel1.add(verpotreros, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 130, 170, 50));
 
         cambiarpotreros.setBackground(new java.awt.Color(102, 102, 102));
         cambiarpotreros.setForeground(new java.awt.Color(102, 102, 102));
@@ -205,7 +205,7 @@ public class adm_ganado extends javax.swing.JFrame {
             .addComponent(cambiar_potreros, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
         );
 
-        jPanel1.add(cambiarpotreros, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 250, 170, 50));
+        jPanel1.add(cambiarpotreros, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 200, 170, 50));
 
         llenardatos.setBackground(new java.awt.Color(102, 102, 102));
         llenardatos.setForeground(new java.awt.Color(102, 102, 102));
@@ -233,7 +233,7 @@ public class adm_ganado extends javax.swing.JFrame {
             .addComponent(llenar_datos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
         );
 
-        jPanel1.add(llenardatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 350, 170, 50));
+        jPanel1.add(llenardatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 270, 170, 50));
 
         llenardatos1.setBackground(new java.awt.Color(102, 102, 102));
         llenardatos1.setForeground(new java.awt.Color(102, 102, 102));
@@ -261,7 +261,7 @@ public class adm_ganado extends javax.swing.JFrame {
             .addComponent(llenar_datos1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
         );
 
-        jPanel1.add(llenardatos1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 450, 170, 50));
+        jPanel1.add(llenardatos1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 340, 170, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
