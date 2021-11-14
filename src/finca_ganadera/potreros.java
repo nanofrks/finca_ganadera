@@ -312,6 +312,11 @@ public class potreros extends javax.swing.JFrame {
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("potrero ventas");
         jLabel10.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel10MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout potreroventasLayout = new javax.swing.GroupLayout(potreroventas);
         potreroventas.setLayout(potreroventasLayout);
@@ -405,6 +410,17 @@ public class potreros extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(null, "el potrero está vacío");
        }
     }//GEN-LAST:event_jLabel9MouseClicked
+
+    private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
+       ventas potv = new ventas();
+       if(potv.tabla_modelo.getRowCount()!=0){
+            potv.setVisible(true);
+           this.setVisible(false);
+       }
+       else{
+           JOptionPane.showMessageDialog(null, "el potrero está vacío");
+       }
+    }//GEN-LAST:event_jLabel10MouseClicked
 
     /**
      * @param args the command line arguments

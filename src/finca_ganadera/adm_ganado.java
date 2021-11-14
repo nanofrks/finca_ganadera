@@ -23,11 +23,11 @@ public class adm_ganado extends javax.swing.JFrame {
     String[] razas = {"brahman","gyr", "holstein","normando","angus","hereford"};
     String[] potreros = {"1","2", "3","4"};
     String[] vacuna = {"si","no"};
-    public static String[][] potrero1, potrero2, potrero3, potrero4,potrero5,potrero6,potrero7,potrero8;
+    public static String[][] potrero1, potrero2, potrero3, potrero4,potrero5,potrero6,potrero7,potreroV;
     String[] opciones = {"1","2","3","4","5","6","7"};
     Random aleatorio = new Random();
     
-    public byte u=0,d=0,t=0,c=0,n=0,s=0,e=0,jornada=0;
+    public byte u=0,d=0,t=0,c=0,n=0,s=0,e=0,v=0,jornada=0;
     int maxvac;
     boolean jornada_en_proceso = false;
     
@@ -60,6 +60,8 @@ public class adm_ganado extends javax.swing.JFrame {
         llenar_datos = new javax.swing.JLabel();
         jornadavacuna = new javax.swing.JPanel();
         jornada_vacuna = new javax.swing.JLabel();
+        ventas = new javax.swing.JPanel();
+        vender = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setLocationByPlatform(true);
@@ -270,6 +272,36 @@ public class adm_ganado extends javax.swing.JFrame {
 
         jPanel1.add(jornadavacuna, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 340, 170, 50));
 
+        ventas.setBackground(new java.awt.Color(102, 102, 102));
+        ventas.setForeground(new java.awt.Color(102, 102, 102));
+
+        vender.setBackground(new java.awt.Color(0, 0, 0));
+        vender.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        vender.setForeground(new java.awt.Color(255, 255, 255));
+        vender.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        vender.setText("vender");
+        vender.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        vender.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                venderMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout ventasLayout = new javax.swing.GroupLayout(ventas);
+        ventas.setLayout(ventasLayout);
+        ventasLayout.setHorizontalGroup(
+            ventasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ventasLayout.createSequentialGroup()
+                .addComponent(vender, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 1, Short.MAX_VALUE))
+        );
+        ventasLayout.setVerticalGroup(
+            ventasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(vender, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(ventas, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 410, 170, 50));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -407,6 +439,40 @@ public class adm_ganado extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jornada_vacunaMouseClicked
 
+    private void venderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_venderMouseClicked
+        
+        try{
+            int fila_sel=-1; //variable pa saber en q fila estoy. -1 significa ninguna fila seleccionada
+            int opcion;
+            fila_sel=t_ganado.getSelectedRow();//me da el número de fila seleccionada
+            
+            if(fila_sel==-1){
+                JOptionPane.showMessageDialog(null, "error: seleccione una fila de la tabla");
+            }else{
+                opcion = JOptionPane.showConfirmDialog(null, "¿Desea vender?");
+                if(opcion == JOptionPane.YES_OPTION){
+                    
+                    for(int i=0;i<info_all.length;i++){
+                        for(int j=0;j<4;j++){
+                                if(t_ganado.getValueAt(fila_sel, 0).equals(info_all[i][0])){
+                                        info_all[i][2]="venta";
+                                        t_ganado.setValueAt("venta", fila_sel, 2);
+                                        u=0;d=0;t=0;c=0;n=0;s=0;e=0;v=0;
+                                        actualizar();
+                                        adm_potreros();
+                                        
+                                }
+                        }
+                   }
+                }
+            }
+            
+        }catch(Exception error){
+            System.out.println("Error al cambiar potreros");
+        }
+        
+    }//GEN-LAST:event_venderMouseClicked
+
     public void actualizar(){
         try{
             for(int i=0; i <info_all.length;i++){
@@ -419,6 +485,7 @@ public class adm_ganado extends javax.swing.JFrame {
                         case "5" -> n++;
                         case "6" -> s++;
                         case "7" -> e++;
+                        case "venta" -> v++;
                     }
                 }
             }
@@ -429,6 +496,7 @@ public class adm_ganado extends javax.swing.JFrame {
             potrero5= new String[n][4];
             potrero6= new String[s][4];
             potrero7= new String[e][4];
+            potreroV = new String[v][4];
             
             
             
@@ -539,6 +607,15 @@ public class adm_ganado extends javax.swing.JFrame {
                                     }
                                 }
                         }
+                            
+                            case "venta" -> {
+                                for(int u=0;u<potreroV.length;u++){
+                                    if(potreroV[u][0]==null){
+                                        potreroV[u][0]=info_all[i][0];potreroV[u][1]=info_all[i][1];potreroV[u][2]=info_all[i][2];potreroV[u][3]=info_all[i][3];
+                                        break;
+                                    }
+                                }
+                        }
 
                     }
                 }
@@ -598,6 +675,8 @@ public class adm_ganado extends javax.swing.JFrame {
     private javax.swing.JLabel llenar_datos;
     private javax.swing.JPanel llenardatos;
     private javax.swing.JTable t_ganado;
+    private javax.swing.JLabel vender;
+    private javax.swing.JPanel ventas;
     private javax.swing.JLabel ver_potreros;
     private javax.swing.JPanel verpotreros;
     private javax.swing.JLabel volver;
