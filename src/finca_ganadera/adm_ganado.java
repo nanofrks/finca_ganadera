@@ -342,6 +342,10 @@ public class adm_ganado extends javax.swing.JFrame {
             if(fila_sel==-1){
                 JOptionPane.showMessageDialog(null, "error: seleccione una fila de la tabla");
             }else{
+                if(t_ganado.getValueAt(fila_sel, 2).equals("ventas")){
+                    JOptionPane.showMessageDialog(null, "el animal no puede ser cambiado de potrero puesto a que está en venta");
+                    return;
+                }
                 opcion= (String) JOptionPane.showInputDialog(null, "seleccione un potrero","cambiar potreros", JOptionPane.QUESTION_MESSAGE,null,opciones,opciones[0]);
                 if(t_ganado.getValueAt(fila_sel, 2).equals(opcion)){
                     JOptionPane.showMessageDialog(null, "el animal ya se encuentra en el potrero seleccionado");
