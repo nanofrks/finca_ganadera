@@ -64,7 +64,7 @@
                     <Column editable="false" title="C&#xf3;digo" type="java.lang.String"/>
                     <Column editable="false" title="Raza" type="java.lang.String"/>
                     <Column editable="false" title="Vacunaci&#xf3;n" type="java.lang.String"/>
-                    <Column editable="false" title="Peso" type="java.lang.String"/>
+                    <Column editable="false" title="Peso (kg)" type="java.lang.String"/>
                   </Table>
                 </Property>
                 <Property name="name" type="java.lang.String" value="t_potrero_ventas" noResource="true"/>

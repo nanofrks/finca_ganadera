@@ -5,6 +5,7 @@
  */
 package finca_ganadera;
 
+import java.util.Random;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,6 +21,7 @@ public class ventas extends javax.swing.JFrame {
     public DefaultTableModel tabla_modelo; //definiendo una variable de tipo model
     String[][]potrero;
     String[] VInfo_ganado=new String[4];
+    Random aleatorio = new Random();
     
     public ventas() {
         initComponents();
@@ -32,7 +34,7 @@ public class ventas extends javax.swing.JFrame {
             
             adm_ganado adm = new adm_ganado();
             int p = adm.potreroV.length;
-            potrero = new String[p][3];
+            potrero = new String[p][4];
             
             for(int i=0;i<potrero.length;i++){
                 potrero[i][0] = adm.potreroV[i][0];
@@ -44,6 +46,16 @@ public class ventas extends javax.swing.JFrame {
                 potrero[i][2] = adm.potreroV[i][3];
                 VInfo_ganado[2]=potrero[i][2];
                 
+                switch(potrero[i][1]){
+                    case "brahman" -> potrero[i][3]=String.valueOf(800+(aleatorio.nextInt(1000-800)+1)) ;
+                    case "gyr" -> potrero[i][3]=String.valueOf(600+(aleatorio.nextInt(800-600)+1));
+                    case "holstein" -> potrero[i][3]=String.valueOf(350+(aleatorio.nextInt(550-350)+1));
+                    case "normando" -> potrero[i][3]=String.valueOf(900+(aleatorio.nextInt(1100-900)+1));
+                    case "angus" -> potrero[i][3]=String.valueOf(500+(aleatorio.nextInt(550-500)+1));
+                    case "hereford" -> potrero[i][3]=String.valueOf(550+(aleatorio.nextInt(550-620)+1));
+                }
+                
+                VInfo_ganado[3]=potrero[i][3];
                 
                 tabla_modelo.addRow(VInfo_ganado);
             }
@@ -86,7 +98,7 @@ public class ventas extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Código", "Raza", "Vacunación", "Peso"
+                "Código", "Raza", "Vacunación", "Peso (kg)"
             }
         ) {
             Class[] types = new Class [] {

@@ -455,8 +455,8 @@ public class adm_ganado extends javax.swing.JFrame {
                     for(int i=0;i<info_all.length;i++){
                         for(int j=0;j<4;j++){
                                 if(t_ganado.getValueAt(fila_sel, 0).equals(info_all[i][0])){
-                                        info_all[i][2]="venta";
-                                        t_ganado.setValueAt("venta", fila_sel, 2);
+                                        info_all[i][2]="ventas";
+                                        t_ganado.setValueAt("ventas", fila_sel, 2);
                                         u=0;d=0;t=0;c=0;n=0;s=0;e=0;v=0;
                                         actualizar();
                                         adm_potreros();
@@ -485,7 +485,7 @@ public class adm_ganado extends javax.swing.JFrame {
                         case "5" -> n++;
                         case "6" -> s++;
                         case "7" -> e++;
-                        case "venta" -> v++;
+                        case "ventas" -> v++;
                     }
                 }
             }
@@ -608,7 +608,7 @@ public class adm_ganado extends javax.swing.JFrame {
                                 }
                         }
                             
-                            case "venta" -> {
+                            case "ventas" -> {
                                 for(int u=0;u<potreroV.length;u++){
                                     if(potreroV[u][0]==null){
                                         potreroV[u][0]=info_all[i][0];potreroV[u][1]=info_all[i][1];potreroV[u][2]=info_all[i][2];potreroV[u][3]=info_all[i][3];
