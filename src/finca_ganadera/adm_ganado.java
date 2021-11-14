@@ -1,9 +1,12 @@
 package finca_ganadera;
 
+import java.awt.Point;
+import java.awt.event.*;
 import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.util.*;
+import javax.swing.JTable;
 
 /**
  *
@@ -24,7 +27,7 @@ public class adm_ganado extends javax.swing.JFrame {
     String[] opciones = {"1","2","3","4","5","6","7"};
     Random aleatorio = new Random();
     
-    public byte u=0,d=0,t=0,c=0,n=0,s=0,e=0;
+    public byte u=0,d=0,t=0,c=0,n=0,s=0,e=0,jornada=0;
     
     public adm_ganado() {
         initComponents();
@@ -45,7 +48,7 @@ public class adm_ganado extends javax.swing.JFrame {
         t_ganado = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        volver = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         verpotreros = new javax.swing.JPanel();
         ver_potreros = new javax.swing.JLabel();
@@ -53,8 +56,8 @@ public class adm_ganado extends javax.swing.JFrame {
         cambiar_potreros = new javax.swing.JLabel();
         llenardatos = new javax.swing.JPanel();
         llenar_datos = new javax.swing.JLabel();
-        llenardatos1 = new javax.swing.JPanel();
-        llenar_datos1 = new javax.swing.JLabel();
+        jornadavacuna = new javax.swing.JPanel();
+        jornada_vacuna = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setLocationByPlatform(true);
@@ -91,14 +94,14 @@ public class adm_ganado extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(0, 153, 51));
 
-        jLabel1.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(153, 255, 153));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("volver");
-        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+        volver.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        volver.setForeground(new java.awt.Color(153, 255, 153));
+        volver.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        volver.setText("volver");
+        volver.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        volver.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
+                volverMouseClicked(evt);
             }
         });
 
@@ -107,14 +110,14 @@ public class adm_ganado extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(volver, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(volver, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -235,33 +238,35 @@ public class adm_ganado extends javax.swing.JFrame {
 
         jPanel1.add(llenardatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 270, 170, 50));
 
-        llenardatos1.setBackground(new java.awt.Color(102, 102, 102));
-        llenardatos1.setForeground(new java.awt.Color(102, 102, 102));
+        jornadavacuna.setBackground(new java.awt.Color(102, 102, 102));
+        jornadavacuna.setForeground(new java.awt.Color(102, 102, 102));
 
-        llenar_datos1.setBackground(new java.awt.Color(0, 0, 0));
-        llenar_datos1.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        llenar_datos1.setForeground(new java.awt.Color(255, 255, 255));
-        llenar_datos1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        llenar_datos1.setText("llenar datos");
-        llenar_datos1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        llenar_datos1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jornada_vacuna.setBackground(new java.awt.Color(0, 0, 0));
+        jornada_vacuna.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        jornada_vacuna.setForeground(new java.awt.Color(255, 255, 255));
+        jornada_vacuna.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jornada_vacuna.setText("jornada vacunación");
+        jornada_vacuna.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jornada_vacuna.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                llenar_datos1MouseClicked(evt);
+                jornada_vacunaMouseClicked(evt);
             }
         });
 
-        javax.swing.GroupLayout llenardatos1Layout = new javax.swing.GroupLayout(llenardatos1);
-        llenardatos1.setLayout(llenardatos1Layout);
-        llenardatos1Layout.setHorizontalGroup(
-            llenardatos1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(llenar_datos1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+        javax.swing.GroupLayout jornadavacunaLayout = new javax.swing.GroupLayout(jornadavacuna);
+        jornadavacuna.setLayout(jornadavacunaLayout);
+        jornadavacunaLayout.setHorizontalGroup(
+            jornadavacunaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jornadavacunaLayout.createSequentialGroup()
+                .addComponent(jornada_vacuna, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 1, Short.MAX_VALUE))
         );
-        llenardatos1Layout.setVerticalGroup(
-            llenardatos1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(llenar_datos1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+        jornadavacunaLayout.setVerticalGroup(
+            jornadavacunaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jornada_vacuna, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
         );
 
-        jPanel1.add(llenardatos1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 340, 170, 50));
+        jPanel1.add(jornadavacuna, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 340, 170, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -277,12 +282,12 @@ public class adm_ganado extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+    private void volverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_volverMouseClicked
         // TODO add your handling code here:
         login log = new login();
             log.setVisible(true);
             this.setVisible(false);
-    }//GEN-LAST:event_jLabel1MouseClicked
+    }//GEN-LAST:event_volverMouseClicked
 
     private void ver_potrerosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ver_potrerosMouseClicked
         if(tabla_modelo.getRowCount()!=0){
@@ -337,9 +342,27 @@ public class adm_ganado extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_llenar_datosMouseClicked
 
-    private void llenar_datos1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_llenar_datos1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_llenar_datos1MouseClicked
+    private void jornada_vacunaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jornada_vacunaMouseClicked
+        if(tabla_modelo.getRowCount()!=0){
+            jornada++;
+            JOptionPane.showMessageDialog(null, "ha iniciado la jornada de vacunación #" + jornada);
+            t_ganado.addMouseListener(new MouseAdapter(){
+                public void mousePressed(MouseEvent mouseEvent){
+                    JTable tabla = (JTable) mouseEvent.getSource();
+                    Point point = mouseEvent.getPoint();
+                    int row = tabla.rowAtPoint(point);
+                    if (mouseEvent.getClickCount() == 2 && tabla.getSelectedRow() != -1) {
+                        int vacuna= JOptionPane.showConfirmDialog(null, "¿Desea vacunar? ");
+                        if(vacuna == JOptionPane.YES_OPTION){
+                            JOptionPane.showMessageDialog(null, "Vacunado");
+                    }
+                    }
+                }
+            });
+        }else{
+            JOptionPane.showMessageDialog(null, "error: llene la tabla antes de continuar");
+        }
+    }//GEN-LAST:event_jornada_vacunaMouseClicked
 
     public void actualizar(){
         try{
@@ -522,18 +545,18 @@ public class adm_ganado extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel cambiar_potreros;
     private javax.swing.JPanel cambiarpotreros;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel jornada_vacuna;
+    private javax.swing.JPanel jornadavacuna;
     private javax.swing.JLabel llenar_datos;
-    private javax.swing.JLabel llenar_datos1;
     private javax.swing.JPanel llenardatos;
-    private javax.swing.JPanel llenardatos1;
     private javax.swing.JTable t_ganado;
     private javax.swing.JLabel ver_potreros;
     private javax.swing.JPanel verpotreros;
+    private javax.swing.JLabel volver;
     // End of variables declaration//GEN-END:variables
 }
