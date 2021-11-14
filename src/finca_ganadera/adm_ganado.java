@@ -28,6 +28,8 @@ public class adm_ganado extends javax.swing.JFrame {
     Random aleatorio = new Random();
     
     public byte u=0,d=0,t=0,c=0,n=0,s=0,e=0,jornada=0;
+    int maxvac;
+    boolean jornada_en_proceso = false;
     
     public adm_ganado() {
         initComponents();
@@ -77,7 +79,7 @@ public class adm_ganado extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -344,21 +346,42 @@ public class adm_ganado extends javax.swing.JFrame {
 
     private void jornada_vacunaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jornada_vacunaMouseClicked
         if(tabla_modelo.getRowCount()!=0){
-            jornada++;
-            JOptionPane.showMessageDialog(null, "ha iniciado la jornada de vacunación #" + jornada);
-            t_ganado.addMouseListener(new MouseAdapter(){
-                public void mousePressed(MouseEvent mouseEvent){
-                    JTable tabla = (JTable) mouseEvent.getSource();
-                    Point point = mouseEvent.getPoint();
-                    int row = tabla.rowAtPoint(point);
-                    if (mouseEvent.getClickCount() == 2 && tabla.getSelectedRow() != -1) {
-                        int vacuna= JOptionPane.showConfirmDialog(null, "¿Desea vacunar? ");
-                        if(vacuna == JOptionPane.YES_OPTION){
-                            JOptionPane.showMessageDialog(null, "Vacunado");
+            
+            if(!jornada_en_proceso){
+                maxvac=10;
+                jornada++;
+
+                JOptionPane.showMessageDialog(null, "ha iniciado la jornada de vacunación #" + jornada);
+                jornada_en_proceso=true;
+
+                t_ganado.addMouseListener(new MouseAdapter(){
+                    public void mousePressed(MouseEvent mouseEvent){
+
+                        JTable tabla = (JTable) mouseEvent.getSource();
+                        Point point = mouseEvent.getPoint();
+                        int row = tabla.rowAtPoint(point);
+
+                        if (mouseEvent.getClickCount() == 2 && tabla.getSelectedRow() != -1) {
+                            int vacuna= JOptionPane.showConfirmDialog(null, "¿Desea vacunar? ");
+
+                            if(vacuna == JOptionPane.YES_OPTION){
+                                maxvac--;
+                                if(maxvac<0){
+                                    JOptionPane.showMessageDialog(null, "Solo se pueden vacunar 10 animales por jornada");
+                                    jornada_en_proceso=false;
+                                    return;
+                                }
+                                else{
+                                    JOptionPane.showMessageDialog(null, "Vacunado");
+                                }
+                        }
+                        }
                     }
-                    }
-                }
-            });
+                });
+            }else{
+             JOptionPane.showMessageDialog(null, "ya hay una jornada de vacunación en proceso");   
+            }
+            
         }else{
             JOptionPane.showMessageDialog(null, "error: llene la tabla antes de continuar");
         }
