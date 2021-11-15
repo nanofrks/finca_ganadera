@@ -287,23 +287,26 @@ public class ventas extends javax.swing.JFrame {
 
     private void llevar_feriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_llevar_feriaMouseClicked
        try{
-           int nro_camiones=1,acum=0,peso,max8;
+           int nro_camiones=0,acum=0,peso,max8,pesot;
            for (int i=0;i<potrero.length;i++){
                peso = Integer.parseInt(potrero[i][3]);
                acum+=peso;
                
            }
            
-           if(potrero.length>8){
-               
-                   max8 = potrero.length/8;
-                   if(potrero.length%8 != 0){
-                       nro_camiones++;
-                   }
-                   nro_camiones += max8;
-               }
+           System.out.println("peso total " + acum);
            
-           JOptionPane.showMessageDialog(null, "nro camiones necesarios " + nro_camiones);
+           if(potrero.length>8 || acum>6000){ 
+                   pesot=acum/6000;
+                   nro_camiones+=pesot;
+                   max8=potrero.length/8;
+                   nro_camiones+=max8;
+               }
+           else{
+               nro_camiones=1;
+           }
+           
+           JOptionPane.showMessageDialog(null, "nro de camiones necesarios " + nro_camiones);
            
            
        }catch(Exception error){

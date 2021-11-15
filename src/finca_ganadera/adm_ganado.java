@@ -5,7 +5,6 @@ import java.awt.event.*;
 import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import java.util.*;
 import javax.swing.JTable;
 
 /**
@@ -18,7 +17,6 @@ public class adm_ganado extends javax.swing.JFrame {
      * Creates new form adm_ganado
      */
     DefaultTableModel tabla_modelo; //definiendo una variable de tipo model
-    private potrero1 pot1;private potrero2 pot2;private potrero3 pot3;private potrero4 pot4;private potrero5 pot5;private potrero6 pot6; private potrero7 pot7;private ventas potv;
         
     String[] VInfo_ganado=new String[4];public static String[][]info_all = new String[250][4];
     String[] razas = {"brahman","gyr", "holstein","normando","angus","hereford"};
@@ -488,19 +486,6 @@ public class adm_ganado extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_venderMouseClicked
-
-    public void comprobacion_pestañas(){
-        try{
-            
-            if(pot1.isVisible()){
-                
-            }
-            
-        }catch(Exception error){
-            System.out.println("error comp pestañas " + error);
-        }
-    }
-    
     public void actualizar(){
         try{
             for(int i=0; i <info_all.length;i++){
