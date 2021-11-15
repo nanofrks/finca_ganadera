@@ -18,13 +18,13 @@ public class adm_ganado extends javax.swing.JFrame {
      * Creates new form adm_ganado
      */
     DefaultTableModel tabla_modelo; //definiendo una variable de tipo model
-    String[] VInfo_ganado=new String[4];
-    public static String[][]info_all = new String[250][4];
+    private potrero1 pot1;private potrero2 pot2;private potrero3 pot3;private potrero4 pot4;private potrero5 pot5;private potrero6 pot6; private potrero7 pot7;private ventas potv;
+        
+    String[] VInfo_ganado=new String[4];public static String[][]info_all = new String[250][4];
     String[] razas = {"brahman","gyr", "holstein","normando","angus","hereford"};
-    String[] potreros = {"1","2", "3","4"};
-    String[] vacuna = {"si","no"};
-    public static String[][] potrero1, potrero2, potrero3, potrero4,potrero5,potrero6,potrero7,potreroV;
+    String[] potreros = {"1","2", "3","4"};String[] vacuna = {"si","no"};public static String[][] potrero1, potrero2, potrero3, potrero4,potrero5,potrero6,potrero7,potreroV;
     String[] opciones = {"1","2","3","4","5","6","7"};
+    
     Random aleatorio = new Random();
     
     public byte u=0,d=0,t=0,c=0,n=0,s=0,e=0,v=0,jornada=0;
@@ -339,29 +339,35 @@ public class adm_ganado extends javax.swing.JFrame {
             String opcion;
             fila_sel=t_ganado.getSelectedRow();//me da el número de fila seleccionada
             
-            if(fila_sel==-1){
-                JOptionPane.showMessageDialog(null, "error: seleccione una fila de la tabla");
-            }else{
-                if(t_ganado.getValueAt(fila_sel, 2).equals("ventas")){
-                    JOptionPane.showMessageDialog(null, "el animal no puede ser cambiado de potrero puesto a que está en venta");
-                    return;
-                }
-                opcion= (String) JOptionPane.showInputDialog(null, "seleccione un potrero","cambiar potreros", JOptionPane.QUESTION_MESSAGE,null,opciones,opciones[0]);
-                if(t_ganado.getValueAt(fila_sel, 2).equals(opcion)){
-                    JOptionPane.showMessageDialog(null, "el animal ya se encuentra en el potrero seleccionado");
-                }
-                else{
-                    for(int i=0;i<info_all.length;i++){
-                        for(int j=0;j<4;j++){
-                                if(t_ganado.getValueAt(fila_sel, 0).equals(info_all[i][0])){
-                                        info_all[i][2]=opcion;
-                                        t_ganado.setValueAt(opcion.toString(), fila_sel, 2);
-                                        u=0;d=0;t=0;c=0;n=0;s=0;e=0;
-                                        actualizar();
-                                        adm_potreros();
-                                }
-                        }
-                   }
+            if(jornada_en_proceso){
+                JOptionPane.showMessageDialog(null, "error: no se puede cambiar de potrero durante una jornada de vacunación activa");
+                return;
+            }
+            else{
+                if(fila_sel==-1){
+                    JOptionPane.showMessageDialog(null, "error: seleccione una fila de la tabla");
+                }else{
+                    if(t_ganado.getValueAt(fila_sel, 2).equals("ventas")){
+                        JOptionPane.showMessageDialog(null, "el animal no puede ser cambiado de potrero puesto a que está en venta");
+                        return;
+                    }
+                    opcion= (String) JOptionPane.showInputDialog(null, "seleccione un potrero","cambiar potreros", JOptionPane.QUESTION_MESSAGE,null,opciones,opciones[0]);
+                    if(t_ganado.getValueAt(fila_sel, 2).equals(opcion)){
+                        JOptionPane.showMessageDialog(null, "el animal ya se encuentra en el potrero seleccionado");
+                    }
+                    else{
+                        for(int i=0;i<info_all.length;i++){
+                            for(int j=0;j<4;j++){
+                                    if(t_ganado.getValueAt(fila_sel, 0).equals(info_all[i][0])){
+                                            info_all[i][2]=opcion;
+                                            t_ganado.setValueAt(opcion.toString(), fila_sel, 2);
+                                            u=0;d=0;t=0;c=0;n=0;s=0;e=0;
+                                            actualizar();
+                                            adm_potreros();
+                                    }
+                            }
+                       }
+                    }
                 }
             }
             
@@ -369,7 +375,7 @@ public class adm_ganado extends javax.swing.JFrame {
             System.out.println("Error al cambiar potreros");
         }
     }//GEN-LAST:event_cambiar_potrerosMouseClicked
-
+    
     private void llenar_datosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_llenar_datosMouseClicked
         if(tabla_modelo.getRowCount() < 250){
             insert();
@@ -450,25 +456,31 @@ public class adm_ganado extends javax.swing.JFrame {
             int opcion;
             fila_sel=t_ganado.getSelectedRow();//me da el número de fila seleccionada
             
-            if(fila_sel==-1){
-                JOptionPane.showMessageDialog(null, "error: seleccione una fila de la tabla");
-            }else{
-                opcion = JOptionPane.showConfirmDialog(null, "¿Desea vender?");
-                if(opcion == JOptionPane.YES_OPTION){
-                    
-                    for(int i=0;i<info_all.length;i++){
-                        for(int j=0;j<4;j++){
-                                if(t_ganado.getValueAt(fila_sel, 0).equals(info_all[i][0])){
-                                        info_all[i][2]="ventas";
-                                        t_ganado.setValueAt("ventas", fila_sel, 2);
-                                        u=0;d=0;t=0;c=0;n=0;s=0;e=0;v=0;
-                                        actualizar();
-                                        adm_potreros();
-                                        
+            if(jornada_en_proceso){
+                JOptionPane.showMessageDialog(null, "error: no se puede vender durante una jornada de vacunación activa");
+            }
+            else{
+            
+                if(fila_sel==-1){
+                    JOptionPane.showMessageDialog(null, "error: seleccione una fila de la tabla");
+                }else{
+                        opcion = JOptionPane.showConfirmDialog(null, "¿Desea vender?");
+                        if(opcion == JOptionPane.YES_OPTION){
+
+                            for(int i=0;i<info_all.length;i++){
+                                for(int j=0;j<4;j++){
+                                        if(t_ganado.getValueAt(fila_sel, 0).equals(info_all[i][0])){
+                                                info_all[i][2]="ventas";
+                                                t_ganado.setValueAt("ventas", fila_sel, 2);
+                                                u=0;d=0;t=0;c=0;n=0;s=0;e=0;v=0;
+                                                actualizar();
+                                                adm_potreros();
+
+                                        }
                                 }
+                           }
                         }
-                   }
-                }
+                    }
             }
             
         }catch(Exception error){
@@ -477,6 +489,18 @@ public class adm_ganado extends javax.swing.JFrame {
         
     }//GEN-LAST:event_venderMouseClicked
 
+    public void comprobacion_pestañas(){
+        try{
+            
+            if(pot1.isVisible()){
+                
+            }
+            
+        }catch(Exception error){
+            System.out.println("error comp pestañas " + error);
+        }
+    }
+    
     public void actualizar(){
         try{
             for(int i=0; i <info_all.length;i++){

@@ -6,6 +6,7 @@
 package finca_ganadera;
 
 import java.util.Random;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -78,6 +79,8 @@ public class ventas extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         t_potrero_ventas = new javax.swing.JTable();
+        jPanel10 = new javax.swing.JPanel();
+        llevar_feria = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -120,6 +123,33 @@ public class ventas extends javax.swing.JFrame {
         jScrollPane1.setViewportView(t_potrero_ventas);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, -1, -1));
+
+        jPanel10.setBackground(new java.awt.Color(0, 102, 51));
+
+        llevar_feria.setBackground(new java.awt.Color(255, 255, 204));
+        llevar_feria.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        llevar_feria.setForeground(new java.awt.Color(255, 255, 204));
+        llevar_feria.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        llevar_feria.setText("llevar a feria");
+        llevar_feria.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        llevar_feria.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                llevar_feriaMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(llevar_feria, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(llevar_feria, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, -1, 80));
 
         jPanel4.setBackground(new java.awt.Color(153, 204, 0));
 
@@ -255,6 +285,32 @@ public class ventas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void llevar_feriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_llevar_feriaMouseClicked
+       try{
+           int nro_camiones=1,acum=0,peso,max8;
+           for (int i=0;i<potrero.length;i++){
+               peso = Integer.parseInt(potrero[i][3]);
+               acum+=peso;
+               
+           }
+           
+           if(potrero.length>8){
+               
+                   max8 = potrero.length/8;
+                   if(potrero.length%8 != 0){
+                       nro_camiones++;
+                   }
+                   nro_camiones += max8;
+               }
+           
+           JOptionPane.showMessageDialog(null, "nro camiones necesarios " + nro_camiones);
+           
+           
+       }catch(Exception error){
+           System.out.println("error feria " + error);
+       }
+    }//GEN-LAST:event_llevar_feriaMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -292,6 +348,7 @@ public class ventas extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -301,6 +358,7 @@ public class ventas extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel llevar_feria;
     private javax.swing.JTable t_potrero_ventas;
     // End of variables declaration//GEN-END:variables
 }
