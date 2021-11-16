@@ -336,10 +336,9 @@ public class adm_ganado extends javax.swing.JFrame {
             int fila_sel=-1; //variable pa saber en q fila estoy. -1 significa ninguna fila seleccionada
             String opcion;
             fila_sel=t_ganado.getSelectedRow();//me da el número de fila seleccionada
-            
+           
             if(jornada_en_proceso){
                 JOptionPane.showMessageDialog(null, "error: no se puede cambiar de potrero durante una jornada de vacunación activa");
-                return;
             }
             else{
                 if(fila_sel==-1){
@@ -347,6 +346,10 @@ public class adm_ganado extends javax.swing.JFrame {
                 }else{
                     if(t_ganado.getValueAt(fila_sel, 2).equals("ventas")){
                         JOptionPane.showMessageDialog(null, "el animal no puede ser cambiado de potrero puesto a que está en venta");
+                        return;
+                    }
+                    if(t_ganado.getValueAt(fila_sel, 3).equals("no")){
+                        JOptionPane.showMessageDialog(null, "vacune al animal antes de desplazarlo");
                         return;
                     }
                     opcion= (String) JOptionPane.showInputDialog(null, "seleccione un potrero","cambiar potreros", JOptionPane.QUESTION_MESSAGE,null,opciones,opciones[0]);
@@ -358,7 +361,7 @@ public class adm_ganado extends javax.swing.JFrame {
                             for(int j=0;j<4;j++){
                                     if(t_ganado.getValueAt(fila_sel, 0).equals(info_all[i][0])){
                                             info_all[i][2]=opcion;
-                                            t_ganado.setValueAt(opcion.toString(), fila_sel, 2);
+                                            t_ganado.setValueAt(opcion, fila_sel, 2);
                                             u=0;d=0;t=0;c=0;n=0;s=0;e=0;
                                             actualizar();
                                             adm_potreros();
@@ -385,7 +388,12 @@ public class adm_ganado extends javax.swing.JFrame {
     }//GEN-LAST:event_llenar_datosMouseClicked
 
     private void jornada_vacunaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jornada_vacunaMouseClicked
-        if(tabla_modelo.getRowCount()!=0){
+        
+        if(tabla_modelo.getRowCount()==0){
+            JOptionPane.showMessageDialog(null, "error: llene la tabla antes de continuar");
+            return;
+            
+        }
             
             if(!jornada_en_proceso){
                 maxvac=10;
@@ -415,7 +423,6 @@ public class adm_ganado extends javax.swing.JFrame {
                                 if(maxvac<0){
                                     JOptionPane.showMessageDialog(null, "Solo se pueden vacunar 10 animales por jornada");
                                     jornada_en_proceso=false;
-                                    return;
                                 }
                                 else{
                                     if(t_ganado.getValueAt(row, 3).equals("no")){
@@ -442,9 +449,6 @@ public class adm_ganado extends javax.swing.JFrame {
              JOptionPane.showMessageDialog(null, "ya hay una jornada de vacunación en proceso");   
             }
             
-        }else{
-            JOptionPane.showMessageDialog(null, "error: llene la tabla antes de continuar");
-        }
     }//GEN-LAST:event_jornada_vacunaMouseClicked
 
     private void venderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_venderMouseClicked
@@ -462,6 +466,16 @@ public class adm_ganado extends javax.swing.JFrame {
                 if(fila_sel==-1){
                     JOptionPane.showMessageDialog(null, "error: seleccione una fila de la tabla");
                 }else{
+                    if(t_ganado.getValueAt(fila_sel, 3).equals("no")){
+                        JOptionPane.showMessageDialog(null, "vacune al animal antes de desplazarlo");
+                        return;
+                    }
+                    
+                    if(t_ganado.getValueAt(fila_sel, 2).equals("ventas")){
+                        JOptionPane.showMessageDialog(null, "el animal ya está en venta");
+                        return;
+                    }
+                    
                         opcion = JOptionPane.showConfirmDialog(null, "¿Desea vender?");
                         if(opcion == JOptionPane.YES_OPTION){
 
