@@ -454,7 +454,7 @@ public class adm_ganado extends javax.swing.JFrame {
     private void venderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_venderMouseClicked
         
         try{
-            int fila_sel=-1; //variable pa saber en q fila estoy. -1 significa ninguna fila seleccionada
+            int fila_sel=-1; //variable pa saber en que fila estoy. -1 significa ninguna fila seleccionada
             int opcion;
             fila_sel=t_ganado.getSelectedRow();//me da el número de fila seleccionada
             
